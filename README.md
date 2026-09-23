@@ -1,45 +1,24 @@
 # Ozan Girgin — IT, Cloud & Security Portfolio
 
-[Portfolio website](https://ozangirginwork-wq.github.io/) · [Resume](Ozan-Girgin-Resume.pdf)
+[Portfolio website](https://ozangirginwork-wq.github.io/) · [Resume](Ozan-Girgin-Resume.pdf) · [Technical review guide](REVIEW_GUIDE.md)
 
-## Start here: two projects to review
+I am seeking IT support, systems/network support, and junior cloud operations opportunities. These seven personal labs document troubleshooting, access controls, automation, and cloud security in controlled environments.
 
-These personal lab projects demonstrate troubleshooting and cloud security workflows in controlled environments. They are educational exercises, not client engagements or production employment.
+## Choose a review path
 
-| Area | Project | Suggested review path |
+| Role focus | Start here | What to inspect |
 |---|---|---|
-| IT support and Linux operations | [Linux IT Support & Troubleshooting](https://github.com/ozangirginwork-wq/linux-it-support-troubleshooting-lab) | Read the [SSH recovery ticket](https://github.com/ozangirginwork-wq/linux-it-support-troubleshooting-lab/blob/main/tickets/TICKET-003-ssh-service-recovery.md), then compare the diagnosis and restored-service screenshots in the [evidence index](https://github.com/ozangirginwork-wq/linux-it-support-troubleshooting-lab/blob/main/evidence/README.md). |
-| AWS security automation | [AWS Detection & Automated Incident Response](https://github.com/ozangirginwork-wq/aws-security-automated-incident-response) | Review the [design and safety controls](https://github.com/ozangirginwork-wq/aws-security-automated-incident-response#automated-remediation), [historical evidence](https://github.com/ozangirginwork-wq/aws-security-automated-incident-response/blob/main/evidence/README.md), and [production considerations](https://github.com/ozangirginwork-wq/aws-security-automated-incident-response#scope--production-considerations). |
+| IT support / Linux operations | [Linux troubleshooting](https://github.com/ozangirginwork-wq/linux-it-support-troubleshooting-lab) | [SSH failure → diagnosis → recovery](https://github.com/ozangirginwork-wq/linux-it-support-troubleshooting-lab/blob/main/tickets/TICKET-003-ssh-service-recovery.md), with client-side verification |
+| Windows / systems support | [Active Directory](https://github.com/ozangirginwork-wq/windows-server-active-directory-lab) | DNS, domain join, GPO verification, and an [allowed/denied file-access test](https://github.com/ozangirginwork-wq/windows-server-active-directory-lab#positive-and-negative-authorization-test) |
+| Cloud operations / automation | [Python diagnostics](https://github.com/ozangirginwork-wq/python-it-cloud-automation-lab) and [Terraform CI](https://github.com/ozangirginwork-wq/terraform-cicd-pipeline) | Diagnostic reports, failure handling, and infrastructure validation without deployment |
+| Cloud security / incident response | [AWS automated response](https://github.com/ozangirginwork-wq/aws-security-automated-incident-response) | Scoped remediation, independent state verification, tests, and historical evidence |
+| Containers / infrastructure | [Kubernetes troubleshooting](https://github.com/ozangirginwork-wq/secure-kubernetes-deployment-lab) | Hardened rollout recovery, NetworkPolicy allow/deny tests, and disposable-cluster CI |
 
-### Linux support: diagnose, restore, verify
+The [technical review guide](REVIEW_GUIDE.md) links directly to code, tests, reproduction instructions, and limitations. [Manual AWS incident investigation](https://github.com/ozangirginwork-wq/aws-security-incident-response-lab) complements the automated-response project.
 
-Five documented scenarios cover account access, SSH configuration and recovery, file permissions, and disk capacity. Tickets describe symptoms, investigation, resolution, and verification. A [Bash disk monitor](https://github.com/ozangirginwork-wq/linux-it-support-troubleshooting-lab/blob/main/scripts/check-disk.sh) adds configurable thresholds, logging, and exit codes.
+## Evidence and scope
 
-The environment is an Ubuntu VM using VirtualBox NAT. The incidents are isolated lab scenarios; the tickets are technical documentation rather than records of customer support work.
-
-### AWS response: contain exposure and check the resulting state
-
-CloudTrail records a security-group change, EventBridge routes the event, and a Python Lambda responder removes public SSH exposure from a designated lab security group. A separate AWS state query verifies the result.
-
-Key decisions documented in the repository:
-
-- **Bounded remediation:** IAM and application checks restrict changes to the protected security group.
-- **Explicit safety gates:** dry-run behavior and a live-remediation setting control whether changes occur.
-- **Independent verification:** API success alone is insufficient; the responder checks whether exposure remains.
-- **Containment tradeoff:** revoking a matching port-range or all-protocol rule can remove access beyond SSH.
-- **Known detection gap:** the event trigger focuses on one ingress API; pre-existing exposure needs additional detection or reconciliation.
-
-The repository includes [implementation lessons](https://github.com/ozangirginwork-wq/aws-security-automated-incident-response#troubleshooting--lessons-learned) covering Lambda timeout, CI runtime compatibility, and CloudTrail bucket cleanup.
-
-**Evidence boundary:** the historical live exercise covers the original IPv4 TCP/22 scenario. Later hardening is covered by automated tests, not a new live deployment. The AWS infrastructure was torn down. See the [tests](https://github.com/ozangirginwork-wq/aws-security-automated-incident-response/tree/main/tests), [workflow history](https://github.com/ozangirginwork-wq/aws-security-automated-incident-response/actions), and [commit history](https://github.com/ozangirginwork-wq/aws-security-automated-incident-response/commits/main/) for review.
-
-## Other lab projects
-
-- [Windows Server & Active Directory](https://github.com/ozangirginwork-wq/windows-server-active-directory-lab)
-- [Python IT & Cloud Automation](https://github.com/ozangirginwork-wq/python-it-cloud-automation-lab)
-- [AWS Security Incident Response](https://github.com/ozangirginwork-wq/aws-security-incident-response-lab)
-- [Terraform & CI/CD](https://github.com/ozangirginwork-wq/terraform-cicd-pipeline)
-- [Secure Kubernetes Deployment & Troubleshooting](https://github.com/ozangirginwork-wq/secure-kubernetes-deployment-lab)
+These are learning projects, not client engagements or production employment. Each lab separates its implementation from the evidence available for it. Historical screenshots do not establish that today's code is deployed; mocked tests do not establish live cloud behavior. AWS lab resources were cleaned up after the exercises.
 
 ## Website maintenance
 
@@ -58,3 +37,4 @@ GitHub Pages supports public repositories on GitHub Free; no custom domain is re
 - Commit changes to this repository only. GitHub Pages republishes the selected branch.
 
 No photo has been added to the lab repositories or resume.
+
